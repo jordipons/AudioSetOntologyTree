@@ -14,19 +14,28 @@ def fetch_mark (restrictions):
 with open('ASO.json') as data_file:    
 	raw_aso = json.load(data_file)
 
-# format in the proper way!!! "/m/0dgw9r": "restrictions", stuff..
+# format as dictionary:
+## aso["/m/0dgw9r"] > {'restrictions': [u'abstract'], 'child_ids': [u'/m/09l8g', u'/m/01w250', u'/m/09hlz4', u'/m/0bpl036', u'/m/0160x5', u'/m/0k65p', u'/m/01jg02', u'/m/04xp5v', u'/t/dd00012'], 'name': u'Human sounds'}
 aso={}
 for category in raw_aso:
 	tmp={}
-	tmp["name"]=category["name"]
+	tmp["name"]=category["name"]	
 	tmp["restrictions"]=category["restrictions"]
 	tmp["child_ids"]=category["child_ids"]
+	tmp["parents_ids"]=[]
 	aso[category["id"]]=tmp
 
-# 1. fetch higher categories
-higher_categories = ["/m/0dgw9r","/m/0jbk","/m/04rlf","/t/dd00098","/t/dd00041","/m/059j3w","/t/dd00123"]
+# 1. fetch higher_categories > ["/m/0dgw9r","/m/0jbk","/m/04rlf","/t/dd00098","/t/dd00041","/m/059j3w","/t/dd00123"]
+for cat in aso: # find parents
+	for c in aso[cat]["child_ids"]:
+		aso[c]["parents_ids"].append(cat)
 
-# 2. format higher categories
+higher_categories=[] # higher_categories are the ones without parents
+for cat in aso: 
+	if aso[cat]["parents_ids"]==[]:
+		higher_categories.append(cat)
+
+# 2. format ASO properly!
 out_json={}
 out_json["name"]="Ontology"
 out_json["children"]=[]
