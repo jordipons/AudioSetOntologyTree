@@ -22,7 +22,7 @@ def get_all_children(category,aso):
 # formating input .json to a .json format readable for this tree visualization code: https://bl.ocks.org/mbostock/4339083
 
 # 0. read AudioSet Ontology data
-with open('ASO.json') as data_file:    
+with open('ontology.json') as data_file:    
 	raw_aso = json.load(data_file)
 
 # 1. format data as a dictionary
@@ -58,5 +58,5 @@ for category in higher_categories:
 	out_json["children"].append(dict_level1)
 
 # 4. saving output .json
-with open('./../ASO.html5.json', 'w') as f:
+with open('./../ontology.html5.json', 'w') as f:
      json.dump(out_json, f, ensure_ascii=False)
