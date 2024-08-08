@@ -5,8 +5,6 @@ Code adapted from: https://bl.ocks.org/mbostock/4339083
 
 Ontology from: https://github.com/audioset/ontology
 
-Project done in collaboration with Xavier Favory, Eduardo Fonseca and Frederic Font. 
-
 ## Usage
 Open `index.html` in your browser! It requires the following files next to it: `ontology.html5.json` (AudioSet Ontology properly formatted for our html) and `d3.v3.min.js` (D3 library for visualizations).
 
